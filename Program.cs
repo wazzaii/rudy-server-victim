@@ -75,13 +75,6 @@ namespace HttpListenerExample
                 Console.WriteLine(req.UserAgent);
                 Console.WriteLine();
 
-                // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
-                // if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
-                // {
-                // Console.WriteLine("Shutdown requested");
-                // runServer = false;
-                // }
-
                 // Basic form for the server to process
                 if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/process"))
                 {
