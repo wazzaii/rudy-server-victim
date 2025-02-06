@@ -2,11 +2,8 @@
 // Author:    Benjamin N. Summerton <define-private-public>        
 // License:   Unlicense (http://unlicense.org/)
 
-using System;
-using System.IO;
 using System.Text;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace HttpListenerExample
 {
@@ -16,7 +13,7 @@ namespace HttpListenerExample
         public static string url = "http://localhost:8000/";
         public static int pageViews = 0;
         public static int requestCount = 0;
-        public static string pageData = 
+        public static string pageData =
             "<!DOCTYPE>" +
             "<html>" +
             "  <head>" +
@@ -24,8 +21,9 @@ namespace HttpListenerExample
             "  </head>" +
             "  <body>" +
             "    <p>Page Views: {0}</p>" +
-            "    <form method=\"post\" action=\"shutdown\">" +
-            "      <input type=\"submit\" value=\"Shutdown\" {1}>" +
+            "    <form method=\"post\" action=\"process\">" +
+            "      <input type=\"number\" value=\"123456\" {1}>" +
+            "      <input type=\"submit\" value=\"process\" {1}>" +
             "    </form>" +
             "  </body>" +
             "</html>";
@@ -54,10 +52,16 @@ namespace HttpListenerExample
                 Console.WriteLine();
 
                 // If `shutdown` url requested w/ POST, then shutdown the server after serving the page
-                if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
+                // if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/shutdown"))
+                // {
+                // Console.WriteLine("Shutdown requested");
+                // runServer = false;
+                // }
+
+                // Basic form for the server to process
+                if ((req.HttpMethod == "POST") && (req.Url.AbsolutePath == "/process"))
                 {
-                    Console.WriteLine("Shutdown requested");
-                    runServer = false;
+                    Console.WriteLine("Processing the request {0}", requestCount);
                 }
 
                 // Make sure we don't increment the page views counter if `favicon.ico` is requested
