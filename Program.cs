@@ -48,11 +48,16 @@ namespace HttpListenerExample
 
             Console.WriteLine("Start of client data:");
             // Convert the data to a string and display it on the console.
-            string s = reader.ReadToEnd();
-            Console.WriteLine(s);
-            Console.WriteLine("End of client data:");
-            body.Close();
-            reader.Close();
+            try
+            {
+                string s = reader.ReadToEnd();
+                Console.WriteLine(s);
+                Console.WriteLine("End of client data:");
+                body.Close();
+                reader.Close();
+            }
+            catch (Exception) { Console.WriteLine("oops, something went wrong :( "); }
+
             // If you are finished with the request, it should be closed also.
         }
         public static async Task HandleIncomingConnections()
